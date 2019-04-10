@@ -1,0 +1,32 @@
+﻿<Window x:Class="Demo.MVVMLight.WPF.Commands.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        mc:Ignorable="d"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button Content="无参命令" HorizontalAlignment="Left" Margin="39,35,0,0" VerticalAlignment="Top" Width="171" Height="21" ToolTipService.ToolTip="单击无参数命令">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding ParameterlessCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button Content="带参命令" HorizontalAlignment="Left" Margin="39,71,0,0" VerticalAlignment="Top" Width="171" Height="21" ToolTipService.ToolTip="单击带参数命令">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Click">
+                    <cmd:EventToCommand Command="{Binding WithParameterCommand}" 
+                                        CommandParameter="{Binding Text, ElementName=tb1}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        </Button>
+        <Button Content="检测参数的命令" Command="{Binding WithCanExecuteCommand}"  CommandParameter="{Binding Text, ElementName=tb2}" HorizontalAlignment="Left" Margin="39,107,0,0" VerticalAlignment="Top" Width="171" Height="21" ToolTipService.ToolTip="单击检测参数的命令"/>
+        <TextBox x:Name="tb1" HorizontalAlignment="Left" Height="21" Margin="266,73,0,0" TextWrapping="Wrap" Text="参数" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="tb2"  HorizontalAlignment="Left" Height="21" Margin="266,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <Label Content="Required" HorizontalAlignment="Left" Margin="377,106,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
